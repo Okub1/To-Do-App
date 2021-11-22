@@ -13,7 +13,7 @@
                             <div class="modal-body d-flex flex-column align-content-between">
                                 <div class="d-flex flex-column mt-2">
                                     <label>Share to users:</label>
-                                    <select class="form-control col-lg-12 col-md-12 col-sm-4 col-xs-12" name="users[]" multiple="" id="Box1">
+                                    <select class="form-control" name="users[]" multiple="" id="Box1">
                                         @foreach(\App\Models\User::all() as $user)
                                             @if($user->id == $item->owner)
                                                 @continue

@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
 
         Todoitem::factory(20)->create([
-            "owner" => User::all()->random()
+            "owner" => User::first()
         ]);
 
         foreach (Todoitem::all() as $todoitem) {
