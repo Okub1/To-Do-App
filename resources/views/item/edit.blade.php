@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header h4">{{ $item->name }}</div>
                     <div class="p-2">
-                        <form action="/home/{{ $item->id }}/edit" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('editItem', $item->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method("PATCH")
 

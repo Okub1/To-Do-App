@@ -6,13 +6,13 @@
                 <div class="card">
                     <div class="card-header h4">{{ $item->name }}</div>
                     <div class="p-2">
-                        <form action="/home/{{ $item->id }}/share" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('shareItem', $item->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method("PATCH")
 
                             <div class="modal-body d-flex flex-column align-content-between">
                                 <div class="d-flex flex-column mt-2">
-                                    <label>Share to users:</label>
+                                    <label for="Box1">Share to users:</label>
                                     <select class="form-control" name="users[]" multiple="" id="Box1">
                                         @foreach(\App\Models\User::all() as $user)
                                             @if($user->id == $item->owner)
@@ -32,7 +32,7 @@
                                         <i class="fas fa-check"></i>
                                         Save
                                     </button>
-                                    <a href="/home" class="btn btn-danger">
+                                    <a href="{{ url('/home') }}" class="btn btn-danger">
                                         <i class="fas fa-times"></i>
                                         Cancel
                                     </a>

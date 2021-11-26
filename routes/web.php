@@ -27,12 +27,12 @@ Route::post("/home/create", [TodoitemController::class, "store"])->middleware("a
 Route::get("/home/{todoitem}", [TodoitemController::class, "show"])->middleware("auth");
 
 Route::get("/home/{todoitem}/edit", [TodoitemController::class, "edit"])->middleware("auth");
-Route::patch("/home/{todoitem}/edit", [TodoitemController::class, "update"])->middleware("auth");
+Route::patch("/home/{todoitem}/edit", [TodoitemController::class, "update"])->name("editItem")->middleware("auth");
 
 Route::get("/home/{todoitem}/delete", [TodoitemController::class, "delete"])->middleware("auth");
-Route::delete("/home/{todoitem}/delete", [TodoitemController::class, "destroy"])->middleware("auth");
+Route::delete("/home/{todoitem}/delete", [TodoitemController::class, "destroy"])->name("deleteItem")->middleware("auth");
 
 Route::get("/home/{todoitem}/share", [TodoitemController::class, "share"])->middleware("auth");
-Route::patch("/home/{todoitem}/share", [TodoitemController::class, "shareItem"])->middleware("auth");
+Route::patch("/home/{todoitem}/share", [TodoitemController::class, "shareItem"])->name("shareItem")->middleware("auth");
 
 Auth::routes();

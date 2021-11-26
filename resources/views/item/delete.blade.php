@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header h4">{{ $item->name }}</div>
                     <div class="p-2">
-                        <form action="/home/{{ $item->id }}/delete" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('deleteItem', $item->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method("DELETE")
 
@@ -19,7 +19,7 @@
                                         <i class="fas fa-check"></i>
                                         Yes
                                     </button>
-                                    <a href="/home" class="btn btn-danger">
+                                    <a href="{{ url('/home') }}" class="btn btn-danger">
                                         <i class="fas fa-times"></i>
                                         No
                                     </a>

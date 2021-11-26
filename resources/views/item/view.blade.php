@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <a href="/home" class="btn btn-primary">
+                            <a href="{{ url('/home') }}" class="btn btn-primary">
                                 <i class="fas fa-chevron-left"></i>
                                 Back
                             </a>
