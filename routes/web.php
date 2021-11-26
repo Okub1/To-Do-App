@@ -18,21 +18,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get("/", [HomeController::class, "index"])->name("home")->middleware("auth");
-Route::get("/home", [HomeController::class, "index"])->name("home")->middleware("auth");
+Route::group(["middleware" => "auth"], function () {
+    Route::get("/", [HomeController::class, "index"])->name("home");
+    Route::get("/home", [HomeController::class, "index"])->name("home");
 
-Route::post("/home/create", [TodoitemController::class, "store"])->middleware("auth");
+    Route::post("/home/create", [TodoitemController::class, "store"]);
 
 // TODO: create middleware to CRUD users to their certain items only!!
-Route::get("/home/{todoitem}", [TodoitemController::class, "show"])->middleware("auth");
+    Route::get("/home/{todoitem}", [TodoitemController::class, "show"]);
 
-Route::get("/home/{todoitem}/edit", [TodoitemController::class, "edit"])->middleware("auth");
-Route::patch("/home/{todoitem}/edit", [TodoitemController::class, "update"])->name("editItem")->middleware("auth");
+    Route::get("/home/{todoitem}/edit", [TodoitemController::class, "edit"]);
+    Route::patch("/home/{todoitem}/edit", [TodoitemController::class, "update"])->name("editItem");
 
-Route::get("/home/{todoitem}/delete", [TodoitemController::class, "delete"])->middleware("auth");
-Route::delete("/home/{todoitem}/delete", [TodoitemController::class, "destroy"])->name("deleteItem")->middleware("auth");
+    Route::get("/home/{todoitem}/delete", [TodoitemController::class, "delete"]);
+    Route::delete("/home/{todoitem}/delete", [TodoitemController::class, "destroy"])->name("deleteItem");
 
-Route::get("/home/{todoitem}/share", [TodoitemController::class, "share"])->middleware("auth");
-Route::patch("/home/{todoitem}/share", [TodoitemController::class, "shareItem"])->name("shareItem")->middleware("auth");
+    Route::get("/home/{todoitem}/share", [TodoitemController::class, "share"]);
+    Route::patch("/home/{todoitem}/share", [TodoitemController::class, "shareItem"])->name("shareItem");
+});
 
 Auth::routes();
