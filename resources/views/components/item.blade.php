@@ -16,9 +16,6 @@
                     Shared with me by  {{ \App\Models\User::all()->find($item->owner)->name }}
                 @endif
             </div>
-
-        <p>
-        </p>
         <p class="text-secondary font-italic">
             {{$item->created_at}}
         </p>
