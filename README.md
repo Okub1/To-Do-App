@@ -1,3 +1,25 @@
+
+## About this project:
+
+- Simple To-Do app done as job assignment
+
+# Setup
+
+Pre-requisites:
+- https://laravel.com/docs/8.x/installation#getting-started-on-windows
+- php 7.3+
+
+
+Steps:
+1. clone this repo
+2. navigate to project folder
+3. run cmd (windows)
+4. run command "php artisan serve"
+5. visit localhost:8000
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
