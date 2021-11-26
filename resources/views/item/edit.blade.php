@@ -40,11 +40,11 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column mt-2">
-                                        <label>Categories</label>
+                                        <label for="Box1">Categories</label>
                                         <select class="form-control overflow-hidden" name="cat[]" multiple="" id="Box1">
                                             @foreach(\App\Models\Category::all() as $category)
                                                 @if($item->categories->contains($category))
-                                                    <option selected="{{ $category->id }}"> {{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}" selected="{{ $category->id }}"> {{ $category->name }}</option>
                                                 @else
                                                     <option value="{{ $category->id }}"> {{ $category->name }}</option>
                                                 @endif
@@ -57,7 +57,7 @@
                                         <i class="fas fa-check"></i>
                                         Save
                                     </button>
-                                    <a href="/home" class="btn btn-danger">
+                                    <a href="{{ url('/home') }}" class="btn btn-danger">
                                         <i class="fas fa-times"></i>
                                         Cancel
                                     </a>

@@ -23,9 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $items = auth()->user()->todos();
+
         return view('home', [
             "user" => auth()->user(),
-            "items" => auth()->user()->todos()->latest()->paginate(10)
+            "items" => $items->latest()->paginate(10)
         ]);
     }
 }
