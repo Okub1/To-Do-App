@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todoitem;
+use App\Models\TodoItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class TodoitemController extends Controller
+class TodoItemController extends Controller
 {
-    public function show(Todoitem $todoitem)
+    public function show(TodoItem $todoitem)
     {
         return view("item.view", [
             "item" => $todoitem,
@@ -19,14 +19,14 @@ class TodoitemController extends Controller
         ]);
     }
 
-    public function edit(Todoitem $todoitem)
+    public function edit(TodoItem $todoitem)
     {
         return view("item.edit", [
             "item" => $todoitem
         ]);
     }
 
-    public function update(Todoitem $todoitem)
+    public function update(TodoItem $todoitem)
     {
         $attributes = request()->validate([
             "name" => "required",
@@ -45,34 +45,34 @@ class TodoitemController extends Controller
     }
 
 
-    public function share(Todoitem $todoitem)
+    public function share(TodoItem $todoitem)
     {
         return view("item.share", [
             "item" => $todoitem
         ]);
     }
 
-    public function shareItem(Todoitem $todoitem)
+    public function shareItem(TodoItem $todoitem)
     {
         $users = request()->validate([
             "users" => ["required", Rule::exists("users", "id")]
         ]);
 
         $array = Arr::collapse($users);
-        array_push($array, $todoitem->owner);
+        array_push($array, $todoitem->owner_id);
         $todoitem->users()->sync($array);
 
         return redirect("/home");
     }
 
-    public function delete(Todoitem $todoitem)
+    public function delete(TodoItem $todoitem)
     {
         return view("item.delete", [
             "item" => $todoitem
         ]);
     }
 
-    public function destroy(Todoitem $todoitem)
+    public function destroy(TodoItem $todoitem)
     {
         $todoitem->categories()->detach();
         $todoitem->users()->detach();
@@ -92,13 +92,14 @@ class TodoitemController extends Controller
             "text" => "required"
         ]);
 
-        $attributes["owner"] = auth()->id();
+        $attributes["owner_id"] = auth()->id();
+        $attributes["is_done"] = false;
 
         $categories = request()->validate([
             "cat" => ["required", Rule::exists("categories", "id")]
         ]);
 
-        $item = Todoitem::create($attributes);
+        $item = TodoItem::create($attributes);
 
         $item->users()->attach(auth()->user());
 

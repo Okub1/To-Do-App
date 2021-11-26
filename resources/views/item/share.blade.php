@@ -15,7 +15,7 @@
                                     <label for="Box1">Share to users:</label>
                                     <select class="form-control" name="users[]" multiple="" id="Box1">
                                         @foreach(\App\Models\User::all() as $user)
-                                            @if($user->id == $item->owner)
+                                            @if($user->id == $item->owner_id)
                                                 @continue
                                             @endif
 

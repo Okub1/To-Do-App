@@ -13,8 +13,8 @@ class CreateTodoitemUser extends Migration
      */
     public function up()
     {
-        Schema::create('todoitem_user', function (Blueprint $table) {
-            $table->foreignId("todoitem_id")->constrained();
+        Schema::create('todo_item_user', function (Blueprint $table) {
+            $table->foreignId("todo_item_id")->constrained();
             $table->foreignId("user_id")->constrained();
         });
     }
@@ -26,6 +26,6 @@ class CreateTodoitemUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todoitem_user');
+        Schema::dropIfExists('todo_item_user');
     }
 }

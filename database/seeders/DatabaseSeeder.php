@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use App\Models\ToDoItem;
+use App\Models\TodoItem;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,10 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::factory()->create([
-            "name" => "Done"
-        ]);
-
-        Category::factory()->create([
             "name" => "Work"
         ]);
 
@@ -42,17 +38,18 @@ class DatabaseSeeder extends Seeder
 
         User::factory(5)->create();
 
-        Todoitem::factory(20)->create([
-            "owner" => User::first()
+        TodoItem::factory(20)->create([
+            "owner_id" => User::first(),
+            "is_done" => false
         ]);
 
-        foreach (Todoitem::all() as $todoitem) {
+        foreach (TodoItem::all() as $todoitem) {
             $users = User::inRandomOrder()->take(rand(1, 3))->pluck("id");
             $todoitem->users()->attach($users);
         }
 
         // TODO: fix attaching categories to todoitems!
-        foreach (Todoitem::all() as $todoitem) {
+        foreach (TodoItem::all() as $todoitem) {
             $categories = Category::inRandomOrder()->take(rand(1, 4))->pluck("id");
             $todoitem->users()->attach($categories);
         }

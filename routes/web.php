@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TodoitemController;
+use App\Http\Controllers\TodoItemController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,19 +22,19 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/", [HomeController::class, "index"])->name("home");
     Route::get("/home", [HomeController::class, "index"])->name("home");
 
-    Route::post("/home/create", [TodoitemController::class, "store"]);
+    Route::post("/home/create", [TodoItemController::class, "store"]);
 
 // TODO: create middleware to CRUD users to their certain items only!!
-    Route::get("/home/{todoitem}", [TodoitemController::class, "show"]);
+    Route::get("/home/{todoitem}", [TodoItemController::class, "show"]);
 
-    Route::get("/home/{todoitem}/edit", [TodoitemController::class, "edit"]);
-    Route::patch("/home/{todoitem}/edit", [TodoitemController::class, "update"])->name("editItem");
+    Route::get("/home/{todoitem}/edit", [TodoItemController::class, "edit"]);
+    Route::patch("/home/{todoitem}/edit", [TodoItemController::class, "update"])->name("editItem");
 
-    Route::get("/home/{todoitem}/delete", [TodoitemController::class, "delete"]);
-    Route::delete("/home/{todoitem}/delete", [TodoitemController::class, "destroy"])->name("deleteItem");
+    Route::get("/home/{todoitem}/delete", [TodoItemController::class, "delete"]);
+    Route::delete("/home/{todoitem}/delete", [TodoItemController::class, "destroy"])->name("deleteItem");
 
-    Route::get("/home/{todoitem}/share", [TodoitemController::class, "share"]);
-    Route::patch("/home/{todoitem}/share", [TodoitemController::class, "shareItem"])->name("shareItem");
+    Route::get("/home/{todoitem}/share", [TodoItemController::class, "share"]);
+    Route::patch("/home/{todoitem}/share", [TodoItemController::class, "shareItem"])->name("shareItem");
 });
 
 Auth::routes();

@@ -13,11 +13,12 @@ class CreateTodoitems extends Migration
      */
     public function up()
     {
-        Schema::create('todoitems', function (Blueprint $table) {
+        Schema::create('todo_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("owner");
+            $table->foreignId("owner_id")->constrained('users');
             $table->string("name");
             $table->longText("text");
+            $table->boolean("is_done");
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTodoitems extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todoitems');
+        Schema::dropIfExists('todo_items');
     }
 }

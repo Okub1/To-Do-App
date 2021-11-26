@@ -43,10 +43,10 @@ class User extends Authenticatable
     ];
 
     public function todos() {
-        return $this->belongsToMany(ToDoItem::class);
+        return $this->belongsToMany(TodoItem::class);
     }
 
     public function owns() {
-        return $this->hasMany(Todoitem::class, "owner");
+        return $this->hasMany(TodoItem::class, "owner_id");
     }
 }

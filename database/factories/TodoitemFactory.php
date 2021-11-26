@@ -17,7 +17,8 @@ class TodoitemFactory extends Factory
     {
         return [
             "name" => $this->faker->word(),
-            "text" => $this->faker->text()
+            "text" => $this->faker->text(),
+            "is_done" => false
         ];
     }
 }

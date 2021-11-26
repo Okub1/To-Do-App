@@ -13,9 +13,9 @@ class CreateCategoryTodoitem extends Migration
      */
     public function up()
     {
-        Schema::create('category_todoitem', function (Blueprint $table) {
+        Schema::create('category_todo_item', function (Blueprint $table) {
             $table->foreignId("category_id")->constrained();
-            $table->foreignId("todoitem_id")->constrained();
+            $table->foreignId("todo_item_id")->constrained();
         });
     }
 
@@ -26,6 +26,6 @@ class CreateCategoryTodoitem extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_todoitem');
+        Schema::dropIfExists('category_todo_item');
     }
 }
