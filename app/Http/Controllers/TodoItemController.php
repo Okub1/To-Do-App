@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\TodoItem;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class TodoItemController extends Controller
 {
+    public function index() {
+
+        $items = auth()->user()->todos()->filter();
+
+        return view('home', [
+            "user" => auth()->user(),
+            "items" => $items->latest()->paginate(10)
+        ]);
+    }
+
     public function show(TodoItem $todoitem)
     {
         return view("item.view", [

@@ -22,17 +22,36 @@
                             >
                         </div>
                         <div class="d-flex flex-column mt-2">
-                            {{--                           TODO: set up selected values --}}
                             <label for="categories">Categories</label>
-{{--                            {{ $i = 1 }}--}}
-{{--                            @foreach(request("cat") as $test)--}}
-{{--                                {{ request("cat.$i") }} asd--}}
-{{--                                {{ $i++ }}--}}
-{{--                            @endforeach--}}
 
-{{--                            @foreach(\App\Models\Category::all() as $category)--}}
-{{--                                {{ $category->id }}--}}
-{{--                            @endforeach--}}
+                            <div class="border my-1">
+                                Testing:
+                                <br>
+                                {{ request("cat.0") }}
+                                {{ request("cat.1") }}
+                                {{ request("cat.2") }}
+
+                                @foreach(\App\Models\Category::all() as $category)
+                                    <p>{{ $category->id }}</p>
+                                @endforeach
+
+
+                                @foreach(\App\Models\Category::all() as $category)
+                                    @php
+                                        $i = 0
+                                    @endphp
+                                    @foreach(request("cat") as $selected)
+                                        @if($selected == $category->id)
+                                            <p>yes {{ $category->name }}</p>
+                                        @else
+                                            <p> {{ $category->name }}</p>
+                                            @break
+                                        @endif
+                                        {{ $i++ }}
+                                    @endforeach
+                                @endforeach
+                            </div>
+
                             <select class="form-control" name="cat[]" multiple="" id="categories">
                                 @php
                                     $i = 0
@@ -40,7 +59,7 @@
                                 @foreach(\App\Models\Category::all() as $category)
                                     @if(request("cat.$i") == $category->id)
                                         <option value="{{ $category->id }}"
-                                                selected="{{ $i }}"> {{ $category->name }}</option>
+                                                selected> {{ $category->name }}</option>
                                     @else
                                         <option value="{{ $category->id }}"> {{ $category->name }}</option>
                                     @endif
@@ -51,9 +70,23 @@
                         <div class="d-flex flex-column mt-2">
                             <label for="shared">Shared</label>
                             <select class="form-control" name="shared" id="shared">
-                                <option value="0">Both</option>
-                                <option value="1">By me</option>
-                                <option value="2">With me</option>
+                                @switch(request("shared"))
+                                    @case(0)
+                                    <option value="0" selected>Both</option>
+                                    <option value="1">By me</option>
+                                    <option value="2">With me</option>
+                                    @break
+                                    @case(1)
+                                    <option value="0">Both</option>
+                                    <option value="1" selected>By me</option>
+                                    <option value="2">With me</option>
+                                    @break
+                                    @case(2)
+                                    <option value="0">Both</option>
+                                    <option value="1">By me</option>
+                                    <option value="2" selected>With me</option>
+                                    @break
+                                @endswitch
                             </select>
                         </div>
                     </div>
@@ -68,9 +101,3 @@
         </div>
     </div>
 </form>
-
-<script>
-    window.onload = function() {
-        document.getElementById("categories").focus();
-    };
-</script>

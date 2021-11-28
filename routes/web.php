@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(["middleware" => "auth"], function () {
-    Route::get("/", [HomeController::class, "index"])->name("home");
-    Route::get("/home", [HomeController::class, "index"])->name("home");
+    Route::get("/", [TodoItemController::class, "index"])->name("home");
+    Route::get("/home", [TodoItemController::class, "index"])->name("home");
 
 // TODO: create middleware to CRUD users to their certain items only!!
     Route::get("/home/{todoitem}", [TodoItemController::class, "show"]);
