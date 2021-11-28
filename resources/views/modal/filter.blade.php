@@ -17,14 +17,34 @@
                                    type="text"
                                    name="name"
                                    id="name"
+                                   value="{{ request("name") }}"
                                    placeholder="Any"
                             >
                         </div>
                         <div class="d-flex flex-column mt-2">
-                            <label for="cat[]">Categories</label>
-                            <select class="form-control" name="cat[]" multiple="" id="cat[]">
+                            {{--                           TODO: set up selected values --}}
+                            <label for="categories">Categories</label>
+{{--                            {{ $i = 1 }}--}}
+{{--                            @foreach(request("cat") as $test)--}}
+{{--                                {{ request("cat.$i") }} asd--}}
+{{--                                {{ $i++ }}--}}
+{{--                            @endforeach--}}
+
+{{--                            @foreach(\App\Models\Category::all() as $category)--}}
+{{--                                {{ $category->id }}--}}
+{{--                            @endforeach--}}
+                            <select class="form-control" name="cat[]" multiple="" id="categories">
+                                @php
+                                    $i = 0
+                                @endphp
                                 @foreach(\App\Models\Category::all() as $category)
-                                    <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                    @if(request("cat.$i") == $category->id)
+                                        <option value="{{ $category->id }}"
+                                                selected="{{ $i }}"> {{ $category->name }}</option>
+                                    @else
+                                        <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                    @endif
+                                    {{ $i++ }}
                                 @endforeach
                             </select>
                         </div>
@@ -48,3 +68,9 @@
         </div>
     </div>
 </form>
+
+<script>
+    window.onload = function() {
+        document.getElementById("categories").focus();
+    };
+</script>

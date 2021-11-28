@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        ddd(request("name"));
+        // filtering
+
         $items = auth()->user()->todos();
+
+        if (request("name")) {
+            $items->where("name", "like", "%" . request("name") . "%")
+            ->orWhere("text", "like", "%" . request("name") . "%");
+        }
+
+        if (request("cat")) {
+            ddd(request("cat"));
+            // todo
+        }
+
 
         return view('home', [
             "user" => auth()->user(),
