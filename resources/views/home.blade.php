@@ -11,7 +11,7 @@
                             <i class="fas fa-plus"></i>
                             New To-Do
                         </a>
-                        <a class="btn btn-primary col-5" href="#" role="button">
+                        <a class="btn btn-primary col-5" href="#" data-toggle="modal" data-target="#ModalFilter" role="button">
                             <i class="fas fa-filter"></i>
                             Filter
                         </a>
@@ -29,4 +29,5 @@
         </div>
     </div>
     @include("modal.create")
+    @include("modal.filter")
 @endsection

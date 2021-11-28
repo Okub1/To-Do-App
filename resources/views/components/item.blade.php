@@ -35,25 +35,25 @@
     </div>
     @if($item->owner_id == $user->id)
         <div class="d-flex flex-column align-content-between align-self-center">
-            <a class="btn btn-outline-dark mt-1" title="Edit" href="/home/{{ $item->id }}/edit">
+            <a class="btn btn-outline-dark mt-1" title="Edit" href="{{ route('editItem', $item->id) }}">
                 <i class="fas fa-pen"></i>
             </a>
-            <a class="btn btn-outline-primary mt-1" title="Share" href="/home/{{ $item->id }}/share">
+            <a class="btn btn-outline-primary mt-1" title="Share" href="{{ route('shareItem', $item->id) }}">
                 <i class="fas fa-share"></i>
             </a>
-            <a class="btn btn-outline-danger mt-1" title="Delete" href="/home/{{ $item->id }}/delete">
+            <a class="btn btn-outline-danger mt-1" title="Delete" href="{{ route('deleteItem', $item->id) }}">
                 <i class="fas fa-trash"></i>
             </a>
         </div>
     @else
         <div class="d-flex flex-column align-content-between align-self-center">
-            <a class="btn disabled btn-outline-secondary mt-1" title="Edit" href="/home/{{ $item->id }}/edit">
+            <a class="btn disabled btn-outline-secondary mt-1" title="Edit" href="#">
                 <i class="fas fa-pen"></i>
             </a>
-            <a class="btn disabled btn-outline-secondary mt-1" title="Share" href="/home/{{ $item->id }}/share">
+            <a class="btn disabled btn-outline-secondary mt-1" title="Share" href="#">
                 <i class="fas fa-share"></i>
             </a>
-            <a class="btn disabled btn-outline-secondary mt-1" title="Delete" href="/home/{{ $item->id }}/delete">
+            <a class="btn disabled btn-outline-secondary mt-1" title="Delete" href="#">
                 <i class="fas fa-trash"></i>
             </a>
         </div>

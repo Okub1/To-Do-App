@@ -22,10 +22,10 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/", [HomeController::class, "index"])->name("home");
     Route::get("/home", [HomeController::class, "index"])->name("home");
 
-    Route::post("/home/create", [TodoItemController::class, "store"]);
-
 // TODO: create middleware to CRUD users to their certain items only!!
     Route::get("/home/{todoitem}", [TodoItemController::class, "show"]);
+
+    Route::post("/home/create", [TodoItemController::class, "store"])->name("createItem");
 
     Route::get("/home/{todoitem}/edit", [TodoItemController::class, "edit"]);
     Route::patch("/home/{todoitem}/edit", [TodoItemController::class, "update"])->name("editItem");
