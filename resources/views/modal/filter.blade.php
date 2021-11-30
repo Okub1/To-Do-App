@@ -27,31 +27,14 @@
                             <div class="border my-1">
                                 Testing:
                                 <br>
-                                {{ request("cat.0") }}
-                                {{ request("cat.1") }}
-                                {{ request("cat.2") }}
-
                                 @foreach(\App\Models\Category::all() as $category)
                                     <p>{{ $category->id }}</p>
                                 @endforeach
-
-
-                                @foreach(\App\Models\Category::all() as $category)
-                                    @php
-                                        $i = 0
-                                    @endphp
-                                    @foreach(request("cat") as $selected)
-                                        @if($selected == $category->id)
-                                            <p>yes {{ $category->name }}</p>
-                                        @else
-                                            <p> {{ $category->name }}</p>
-                                            @break
-                                        @endif
-                                        {{ $i++ }}
-                                    @endforeach
-                                @endforeach
                             </div>
-
+                            {{--
+                            TODO: fix this mess, bug here: when selected categories 2 or 3 or both,
+                                and not 1 with them, then they are not highlighted when you refresh page...
+                            --}}
                             <select class="form-control" name="cat[]" multiple="" id="categories">
                                 @php
                                     $i = 0
@@ -63,6 +46,8 @@
                                     @else
                                         <option value="{{ $category->id }}"> {{ $category->name }}</option>
                                     @endif
+
+
                                     {{ $i++ }}
                                 @endforeach
                             </select>
@@ -72,19 +57,41 @@
                             <select class="form-control" name="shared" id="shared">
                                 @switch(request("shared"))
                                     @case(0)
-                                    <option value="0" selected>Both</option>
+                                    <option value="0" selected></option>
                                     <option value="1">By me</option>
                                     <option value="2">With me</option>
                                     @break
                                     @case(1)
-                                    <option value="0">Both</option>
+                                    <option value="0"></option>
                                     <option value="1" selected>By me</option>
                                     <option value="2">With me</option>
                                     @break
                                     @case(2)
-                                    <option value="0">Both</option>
+                                    <option value="0"></option>
                                     <option value="1">By me</option>
                                     <option value="2" selected>With me</option>
+                                    @break
+                                @endswitch
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column mt-2">
+                            <label for="status">Status</label>
+                            <select class="form-control" name="status" id="status">
+                                @switch(request("status"))
+                                    @case(0)
+                                    <option value="0" selected></option>
+                                    <option value="1">Done</option>
+                                    <option value="2">Ongoing</option>
+                                    @break
+                                    @case(1)
+                                    <option value="0"></option>
+                                    <option value="1" selected>Done</option>
+                                    <option value="2">Ongoing</option>
+                                    @break
+                                    @case(2)
+                                    <option value="0"></option>
+                                    <option value="1">Done</option>
+                                    <option value="2" selected>Ongoing</option>
                                     @break
                                 @endswitch
                             </select>

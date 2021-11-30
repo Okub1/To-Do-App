@@ -27,7 +27,7 @@ Route::group(["middleware" => "auth"], function () {
 
     Route::post("/home/create", [TodoItemController::class, "store"])->name("createItem");
 
-    Route::get("/home/{todoitem}/edit", [TodoItemController::class, "edit"]);
+    Route::get("/home/{todoitem}/edit", [TodoItemController::class, "edit"])->name("editItem");
     Route::patch("/home/{todoitem}/edit", [TodoItemController::class, "update"])->name("editItem");
 
     Route::get("/home/{todoitem}/delete", [TodoItemController::class, "delete"]);

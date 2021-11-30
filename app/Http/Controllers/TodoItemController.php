@@ -10,7 +10,7 @@ class TodoItemController extends Controller
 {
     public function index() {
 
-        $items = auth()->user()->todos()->filter();
+        $items = TodoItem::join("todo_item_user", "todo_items.id", "=", "todo_item_user.todo_item_id")->filter()->where("user_id", auth()->user()->id);
 
         return view('home', [
             "user" => auth()->user(),
@@ -20,6 +20,10 @@ class TodoItemController extends Controller
 
     public function show(TodoItem $todoitem)
     {
+        if ($todoitem->owner->id !== auth()->user()->id) {
+            return abort(401);
+        }
+
         return view("item.view", [
             "item" => $todoitem,
             "user" => auth()->user()

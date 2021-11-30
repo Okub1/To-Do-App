@@ -1,21 +1,22 @@
 <div class="d-flex my-2 p-2 border border-secondary rounded bg-light text-dark">
-{{--    <div class="col-1 align-self-center">--}}
-{{--        <input type="checkbox">--}}
-{{--        --}}{{-- TODO: checkbox ToDo item (add category "Done")--}}
-{{--    </div>--}}
+    {{--    <div class="col-1 align-self-center">--}}
+    {{--        <input type="checkbox">--}}
+    {{--        --}}{{-- TODO: checkbox ToDo item (add category "Done")--}}
+    {{--    </div>--}}
     <div class="col-11">
         <p class="font-weight-bold h4">
             @if($item->is_done)
-                <del class="text-secondary font-italic"><a href="/home/{{ $item->id }}">{{ $item->id }} {{ $item->name }}</a> </del>
+                <del class="text-secondary font-italic"><a
+                        href="/home/{{ $item->id }}">{{ $item->id }} {{ $item->name }}</a></del>
             @else
                 <a href="/home/{{ $item->id }}">{{ $item->id }} {{ $item->name }}</a>
-            @endif
+        @endif
 
-            <div class="text-secondary font-weight-bold">
-                @if($item->owner_id != $user->id)
-                    Shared with me by  {{ \App\Models\User::all()->find($item->owner)->name }}
-                @endif
-            </div>
+        <div class="text-secondary font-weight-bold">
+            @if($item->owner_id != $user->id)
+                Shared with me by  {{ \App\Models\User::all()->find($item->owner)->name }}
+            @endif
+        </div>
         <p class="text-secondary font-italic">
             {{$item->created_at}}
         </p>
@@ -29,7 +30,17 @@
         <div class="mt-1 pt-1 border-top text-secondary">
             categories:
             @foreach($item->categories as $category)
-                {{ $category->name }}
+                @switch($category->id)
+                    @case(1)
+                    <span class="badge badge-pill badge-warning border border-dark">{{ $category->name }}</span>
+                    @break
+                    @case(2)
+                    <span class="badge badge-pill badge-danger border border-dark">{{ $category->name }}</span>
+                    @break
+                    @case(3)
+                    <span class="badge badge-pill badge-success border border-dark">{{ $category->name }}</span>
+                    @break
+                @endswitch
             @endforeach
         </div>
     </div>
